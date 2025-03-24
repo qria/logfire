@@ -69,6 +69,8 @@ def on_response(response: ResponseT, span: LogfireSpan) -> ResponseT:
         message: dict[str, Any] = {'role': 'assistant'}
         if block.type == 'text':
             message['content'] = block.text
+        elif block.type == 'thinking':
+            message['content'] = block.thinking
         else:
             message['tool_calls'] = [
                 {
